@@ -24,7 +24,7 @@ void printInvertedIndex(){
     
     cout << it -> first << ": ";
 
-    for(set<int>::const_iterator set_it = (it->second).begin(); set_it != (it->second).end(); ++it){
+    for(set<int>::const_iterator set_it = (it->second).begin(); set_it != (it->second).end(); ++set_it){
 
       cout << *set_it << " ";
 
@@ -95,7 +95,7 @@ void addWordsfromVectorList(const vector<string> v, const int number){
   
   for(int i(0); i != v.size(); i++){
     //if its in the dictionary, add i to set
-    if(invertedIndex.find(v[i]) != invertedIndex.end()){
+    if(invertedIndex.find(v[i]) == invertedIndex.end()){
       set<int> s;
       s.insert(number);
       invertedIndex[v[i]] = s;
