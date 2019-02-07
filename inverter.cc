@@ -16,6 +16,12 @@ map<string, set<int> > invertedIndex;
 
 vector<string> readFiletoVector(string filename){
   ifstream inFile(filename);
+  
+  if(!inFile.is_open()){
+    cerr << "File not open.\n";
+    exit(1);
+  } 
+  
   vector<string> lines;
   string line;
   while(getline(inFile, line)){
@@ -27,9 +33,26 @@ vector<string> readFiletoVector(string filename){
 
 vector<string> readFiletoVectorbyWord(string filename){
   //reads in the words and sets as vector
+  ifstream inFile(filename);
 
+
+  if(!inFile.is_open()){
+    cerr << "File not open.\n";
+    exit(1);
+  }  
+  
+  vector<string> words;
+  string word;
+
+  while (inFile >> word){
+    words.push_back(word);
+  }
+
+  return words;
   
 }
+
+
 
 void displayVector(const vector<string> v){
 
@@ -40,6 +63,9 @@ void displayVector(const vector<string> v){
   cout << "\n";
 }
 
+
+
+
 void addWordsfromVectorList(const vector<string> v){
 
   for(int i(0); i != v.size(); i++){
@@ -47,6 +73,8 @@ void addWordsfromVectorList(const vector<string> v){
   }
 
 }
+
+
 
 int main(int argc, char *argv[]) {
 
