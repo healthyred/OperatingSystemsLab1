@@ -16,6 +16,12 @@ using namespace std;
 map<string, set<int> > invertedIndex;
 //input >> noskipws >> c; /*parsing the input*/
 
+void printInvertedIndex(){
+  //print the map in order
+
+  
+}
+
 string cleanWord(string word){
   //removes the nonalphabet stuff from words
 
@@ -73,10 +79,15 @@ void displayVector(const vector<string> v){
   cout << "\n";
 }
 
-void addWordsfromVectorList(const vector<string> v){
-
+void addWordsfromVectorList(const vector<string> v, const int number){
+  
   for(int i(0); i != v.size(); i++){
-    
+    //if its in the dictionary, add i to set
+    if(){
+
+    }else{//create a new key,value pair
+
+    }
   }
 
 }
@@ -90,11 +101,16 @@ int main(int argc, char *argv[]) {
 
   string listFilename(argv[1]);
 
-  //vector<string> texts = readFiletoVector(listFilename);
-  //displayVector(texts);
+  vector<string> texts = readFiletoVector(listFilename);
+  displayVector(texts);
 
-  vector<string> words = readFiletoVectorbyWord(listFilename);
-  displayVector(words);
+  for (int i = 0; i != texts.size(); i++){
+    vector<string> words = readFiletoVectorbyWord(texts[i]);
+    displayVector(words);
+  }
+
+  //vector<string> words = readFiletoVectorbyWord(listFilename);
+  //displayVector(words);
   
   
   // cout << "hello, world" << endl;  // Say Hello
