@@ -16,10 +16,22 @@ using namespace std;
 map<string, set<int> > invertedIndex;
 //input >> noskipws >> c; /*parsing the input*/
 
+
+
 void printInvertedIndex(){
   //print the map in order
+  for(map<string, set<int> >::const_iterator it = invertedIndex.begin(); it!= invertedIndex.end(); ++it){
+    
+    cout << it -> first << ": ";
 
-  
+    for(set<int>::const_iterator set_it = (it->second).begin(); set_it != (it->second).end(); ++it){
+
+      cout << *set_it << " ";
+
+    }
+
+    cout << "\n";
+  }
 }
 
 string cleanWord(string word){
@@ -83,10 +95,14 @@ void addWordsfromVectorList(const vector<string> v, const int number){
   
   for(int i(0); i != v.size(); i++){
     //if its in the dictionary, add i to set
-    if(){
-
+    if(invertedIndex.find(v[i]) != invertedIndex.end()){
+      set<int> s;
+      s.insert(number);
+      invertedIndex[v[i]] = s;
     }else{//create a new key,value pair
-
+      set<int> s = invertedIndex[v[i]];
+      s.insert(number);
+      invertedIndex[v[i]] = s;
     }
   }
 
@@ -102,13 +118,17 @@ int main(int argc, char *argv[]) {
   string listFilename(argv[1]);
 
   vector<string> texts = readFiletoVector(listFilename);
-  displayVector(texts);
+  //displayVector(texts);
 
   for (int i = 0; i != texts.size(); i++){
     vector<string> words = readFiletoVectorbyWord(texts[i]);
-    displayVector(words);
+    addWordsfromVectorList(words, i);
+    //displayVector(words);
   }
 
+  printInvertedIndex();
+  
+  //invertedIndex.print();
   //vector<string> words = readFiletoVectorbyWord(listFilename);
   //displayVector(words);
   
