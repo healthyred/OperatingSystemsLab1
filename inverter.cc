@@ -7,12 +7,23 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <sstream>
+#include <regex>
 
 using namespace std;
 
 
 map<string, set<int> > invertedIndex;
 //input >> noskipws >> c; /*parsing the input*/
+
+string cleanWord(string word){
+  //removes the nonalphabet stuff from words
+
+  regex reg("[^a-zA-Z]");
+  word = regex_replace(word, reg, "");
+
+  return word;
+}
 
 vector<string> readFiletoVector(string filename){
   ifstream inFile(filename);
@@ -45,14 +56,13 @@ vector<string> readFiletoVectorbyWord(string filename){
   string word;
 
   while (inFile >> word){
+    word = cleanWord(word);
     words.push_back(word);
   }
 
   return words;
   
 }
-
-
 
 void displayVector(const vector<string> v){
 
@@ -63,9 +73,6 @@ void displayVector(const vector<string> v){
   cout << "\n";
 }
 
-
-
-
 void addWordsfromVectorList(const vector<string> v){
 
   for(int i(0); i != v.size(); i++){
@@ -73,8 +80,6 @@ void addWordsfromVectorList(const vector<string> v){
   }
 
 }
-
-
 
 int main(int argc, char *argv[]) {
 
@@ -85,9 +90,11 @@ int main(int argc, char *argv[]) {
 
   string listFilename(argv[1]);
 
-  vector<string> texts = readFiletoVector(listFilename);
-  displayVector(texts);
-  
+  //vector<string> texts = readFiletoVector(listFilename);
+  //displayVector(texts);
+
+  vector<string> words = readFiletoVectorbyWord(listFilename);
+  displayVector(words);
   
   
   // cout << "hello, world" << endl;  // Say Hello
