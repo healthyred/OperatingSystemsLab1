@@ -22,11 +22,11 @@ void printInvertedIndex(){
   //print the map in order
   for(map<string, set<int> >::const_iterator it = invertedIndex.begin(); it!= invertedIndex.end(); ++it){
     
-    cout << it -> first << ": ";
+    cout << it -> first << ":";
 
     for(set<int>::const_iterator set_it = (it->second).begin(); set_it != (it->second).end(); ++set_it){
 
-      cout << *set_it << " ";
+      cout << " " << *set_it;
 
     }
 
