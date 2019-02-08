@@ -38,7 +38,7 @@ string cleanWord(string word){
   //removes the nonalphabet stuff from words
 
   regex reg("[^a-zA-Z]");
-  word = regex_replace(word, reg, "");
+  word = regex_replace(word, reg, " ");
 
   return word;
 }
@@ -54,11 +54,13 @@ vector<string> readFiletoVector(string filename){
   vector<string> lines;
   string line;
   while(getline(inFile, line)){
+    // cout << line << endl;
     lines.push_back(line);
   }
 
   return lines;
 }
+
 
 vector<string> readFiletoVectorbyWord(string filename){
   //reads in the words and sets as vector
@@ -73,13 +75,33 @@ vector<string> readFiletoVectorbyWord(string filename){
   vector<string> words;
   string word;
 
+  
   while (inFile >> word){
+    // cout << word << endl;
     word = cleanWord(word);
-    words.push_back(word);
+    
+    char str[word.size() + 1];
+    strncpy(str, word.c_str(), word.size() + 1);
+    char* token;
+    char* rest = str;
+
+    while ((token = strtok_r(rest, " ", &rest))){
+      words.push_back(token);
+    }
   }
 
   return words;
   
+}
+
+void testSpace(){
+  char str[] = "Potato farm.";
+  char* token;
+  char* rest = str;
+
+  while ((token = strtok_r(rest, " ", &rest))){
+    printf("%s\n", token);
+  }
 }
 
 void displayVector(const vector<string> v){
@@ -127,6 +149,7 @@ int main(int argc, char *argv[]) {
   }
 
   printInvertedIndex();
+  //testSpace();
   
   //invertedIndex.print();
   //vector<string> words = readFiletoVectorbyWord(listFilename);
