@@ -47,8 +47,8 @@ vector<string> readFiletoVector(string filename){
   ifstream inFile(filename);
   
   if(!inFile.is_open()){
-    cerr << "File not open.\n";
-    exit(1);
+    //inputfile has no filenames
+    inFile.close();
   } 
   
   vector<string> lines;
@@ -66,10 +66,8 @@ vector<string> readFiletoVectorbyWord(string filename){
   //reads in the words and sets as vector
   ifstream inFile(filename);
 
-
   if(!inFile.is_open()){
-    cerr << "File not open.\n";
-    exit(1);
+    inFile.close();
   }  
   
   vector<string> words;
@@ -142,9 +140,15 @@ int main(int argc, char *argv[]) {
   vector<string> texts = readFiletoVector(listFilename);
   //displayVector(texts);
 
+  int count = 0; 
   for (int i = 0; i != texts.size(); i++){
+    ifstream inFile(texts[i]);
+    if(!inFile.is_open()){
+      continue;
+    }
     vector<string> words = readFiletoVectorbyWord(texts[i]);
-    addWordsfromVectorList(words, i);
+    addWordsfromVectorList(words, count);
+    count = count + 1;
     //displayVector(words);
   }
 
