@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string>
-#include <iostream>    // Needed to perform IO operations
+#include <iostream>  
 #include <vector>
 #include <map>
 #include <set>
@@ -14,9 +14,6 @@ using namespace std;
 
 
 map<string, set<int> > invertedIndex;
-//input >> noskipws >> c; /*parsing the input*/
-
-
 
 void printInvertedIndex(){
   //print the map in order
@@ -61,7 +58,6 @@ vector<string> readFiletoVector(string filename){
   return lines;
 }
 
-
 vector<string> readFiletoVectorbyWord(string filename){
   //reads in the words and sets as vector
   ifstream inFile(filename);
@@ -75,7 +71,7 @@ vector<string> readFiletoVectorbyWord(string filename){
 
   
   while (inFile >> word){
-    // cout << word << endl;
+  
     word = cleanWord(word);
     
     char str[word.size() + 1];
@@ -90,16 +86,6 @@ vector<string> readFiletoVectorbyWord(string filename){
 
   return words;
   
-}
-
-void testSpace(){
-  char str[] = "Potato farm.";
-  char* token;
-  char* rest = str;
-
-  while ((token = strtok_r(rest, " ", &rest))){
-    printf("%s\n", token);
-  }
 }
 
 void displayVector(const vector<string> v){
@@ -130,17 +116,12 @@ void addWordsfromVectorList(const vector<string> v, const int number){
 
 int main(int argc, char *argv[]) {
 
-  /*if (argc != 1){
-    cout << "Usage: ./inverter <x>; where <x> is a file that contains names of files" << endl;
-
-    char* words = openFile(argv[1]);*/
-
   string listFilename(argv[1]);
 
   vector<string> texts = readFiletoVector(listFilename);
-  //displayVector(texts);
 
-  int count = 0; 
+  int count = 0;
+  
   for (int i = 0; i != texts.size(); i++){
     ifstream inFile(texts[i]);
     if(!inFile.is_open()){
@@ -148,18 +129,9 @@ int main(int argc, char *argv[]) {
     }
     vector<string> words = readFiletoVectorbyWord(texts[i]);
     addWordsfromVectorList(words, count);
-    count = count + 1;
-    //displayVector(words);
+    count++;
   }
 
   printInvertedIndex();
-  //testSpace();
-  
-  //invertedIndex.print();
-  //vector<string> words = readFiletoVectorbyWord(listFilename);
-  //displayVector(words);
-  
-  
-  // cout << "hello, world" << endl;  // Say Hello
   return 0;          
 }                                 
